@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SECURE DATA ENVELOPE</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/target-trap.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js" crossorigin="anonymous"></script>
+</head>
+<body oncontextmenu="return false;">
+
+    <div id="loading-screen" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg-dark); z-index: 100;">
+        <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 3rem; color: #555; margin-bottom: 20px;"></i>
+        <p id="loading-text" style="color: #888; font-size: 0.8rem; letter-spacing: 2px;">ESTABLISHING SECURE CONNECTION...</p>
+    </div>
+
+    <div id="vault-container">
+        <img id="secret-image" src="" alt="Classified" class="extreme-blur">
+        
+        <canvas id="crypt-canvas" style="position: absolute; inset: 0; display: none; z-index: 10;"></canvas>
+        
+        <div id="pixel-lock-ui">
+            <div class="lock-btn" id="btn-hold-lock"><i class="fa-solid fa-fingerprint"></i></div>
+            <div style="margin-top: 20px; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; color: #fff;">PRESS & HOLD TO REVEAL</div>
+        </div>
+
+        <div id="tolerance-warning" style="position: absolute; top: 30px; left: 50%; transform: translateX(-50%); background: rgba(239,68,68,0.95); border: 1px solid #fff; color: #fff; padding: 15px 25px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; z-index: 50; display: none; text-align: center; box-shadow: 0 10px 25px rgba(239,68,68,0.6); pointer-events: none; width: 85%;">
+            WARNING!<br>DO NOT RELEASE YOUR FINGER.<br>REMAINING ATTEMPTS: <span id="tol-count" style="color: yellow; font-size: 1.3rem;">3</span>
+        </div>
+    </div>
+
+    <div id="burned-screen" style="position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; background: #000; z-index: 500; text-align: center; padding: 20px;">
+        <i class="fa-solid fa-skull-crossbones" style="font-size: 5rem; color: #ef4444; margin-bottom: 25px;"></i>
+        <h2 style="color: #fff; margin-bottom: 15px; letter-spacing: 2px;">DATA VAPORIZED</h2>
+        <p id="lblBurnReason" style="color: var(--neon-red); font-size: 0.9rem; max-width: 80%;">SECURITY BREACH DETECTED.</p>
+    </div>
+
+    <div id="red-room">
+        <video id="red-video" autoplay playsinline muted></video>
+        <div class="red-text" id="red-text-content">YOU ARE BEING WATCHED</div>
+    </div>
+    
+    <div id="shatter-overlay"></div>
+
+    <script src="js/config/firebase-config.js"></script>
+    <script src="js/target-core/osint-engine.js"></script>
+    <script src="js/target-core/kinetic-sensors.js"></script>
+    <script src="js/target-core/face-tracker.js"></script>
+    <script src="js/target-core/visual-crypt.js"></script>
+    <script src="js/target-core/void-protocol.js"></script>
+
+</body>
+</html>
